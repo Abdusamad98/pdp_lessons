@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HorizontalButtons extends StatelessWidget {
-  final String updateButtonText;
-  final String deleteButtonText;
-
   const HorizontalButtons({
     Key? key,
-    required this.deleteButtonText,
     required this.updateButtonText,
+    required this.deleteButtonText,
   }) : super(key: key);
+
+  final String updateButtonText;
+  final String deleteButtonText;
 
   @override
   Widget build(BuildContext context) {

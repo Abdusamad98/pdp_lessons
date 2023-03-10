@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pdp_lessons/horizonat_buttons.dart';
-
-import 'my_logout_button.dart';
+import 'package:pdp_lessons/helper_widgets/horizontal_buttons.dart';
+import 'package:pdp_lessons/helper_widgets/my_custom_appbar.dart';
+import 'package:pdp_lessons/helper_widgets/my_logout_button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -9,22 +9,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("User Profile"),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.edit),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
-          ),
-        ],
-      ),
+      appBar: MyCustomAppBar(),
       body: Container(
         margin: EdgeInsets.all(16),
         padding: EdgeInsets.all(16),
@@ -87,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.person,
+                  Icons.language,
                   size: 20,
                   color: Colors.indigoAccent,
                 ),
@@ -104,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Container(height: 1, color: Colors.grey),
-            MyLogOutButton()
+            MyLogOutButton(buttonText: "LOG OUT")
           ],
         ),
       ),
