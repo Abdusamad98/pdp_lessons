@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pdp_lessons/add_contact_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'models/contact_info_model.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -83,8 +86,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     });
               },
-              leading:
-                  SvgPicture.asset("assets/images/default_person_icon.svg"),
+              leading: myContacts[index].imagePath.isEmpty
+                  ? SvgPicture.asset("assets/images/default_person_icon.svg")
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.file(
+                        File(myContacts[index].imagePath),
+                        width: 45,
+                        height: 45,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
               title: Text(
                 myContacts[index].name + " ${myContacts[index].surName}",
                 maxLines: 1,
@@ -92,7 +104,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               subtitle: Text(myContacts[index].phoneNumber),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                      "Calling..",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    backgroundColor: Colors.white,
+                  ));
+                  launchUrl(
+                      Uri(scheme: "tel", path: myContacts[index].phoneNumber));
+                  // launchUrl(Uri(scheme: "https",host:"kun.uz" ,path: ""));
+                },
                 icon: Icon(
                   Icons.call,
                   color: Colors.green,
@@ -121,23 +144,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
 List<ContactInfoModel> myContacts = [
   ContactInfoModel(
-      phoneNumber: "+998991234567",
-      name: "ExampleName",
-      surName: "ExampleSurname"),
+    phoneNumber: "+998991234567",
+    name: "ExampleName",
+    surName: "ExampleSurname",
+    imagePath: "",
+  ),
   ContactInfoModel(
-      phoneNumber: "+998991234567",
-      name: "ExampleName1",
-      surName: "ExampleSurname"),
+    phoneNumber: "+998991234567",
+    name: "ExampleName1",
+    surName: "ExampleSurname",
+    imagePath: "",
+  ),
   ContactInfoModel(
-      phoneNumber: "+998991234567",
-      name: "ExampleName2",
-      surName: "ExampleSurname"),
+    phoneNumber: "+998991234567",
+    name: "ExampleName2",
+    surName: "ExampleSurname",
+    imagePath: "",
+  ),
   ContactInfoModel(
-      phoneNumber: "+998991234567",
-      name: "ExampleName3",
-      surName: "ExampleSurname"),
+    phoneNumber: "+998991234567",
+    name: "ExampleName3",
+    surName: "ExampleSurname",
+    imagePath: "",
+  ),
   ContactInfoModel(
-      phoneNumber: "+998991234567",
-      name: "ExampleName4",
-      surName: "ExampleSurname"),
+    phoneNumber: "+998991234567",
+    name: "ExampleName4",
+    surName: "ExampleSurname",
+    imagePath: "",
+  ),
 ];

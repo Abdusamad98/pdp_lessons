@@ -1,4 +1,8 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'models/contact_info_model.dart';
 
@@ -16,6 +20,12 @@ class _AddContactScreenState extends State<AddContactScreen> {
   final phoneController = TextEditingController();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
+
+  final ImagePicker picker = ImagePicker();
+
+  XFile? image;
+
+  String pathOfImage = "NOTHING SELECTED";
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +56,7 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   phoneNumber: phoneController.text,
                   name: nameController.text,
                   surName: surnameController.text,
+                  imagePath: image!.path,
                 );
                 // Step 2
                 widget.transferContact.call(newContact);
@@ -111,6 +122,39 @@ class _AddContactScreenState extends State<AddContactScreen> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5))),
             ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      child: Text("Camera"),
+                      onPressed: () async {
+                        image = await picker.pickImage(source: ImageSource.camera);
+
+                        setState(() {
+                          pathOfImage = image!.path;
+                        });
+                      },
+                    )),
+                const SizedBox(width: 10),
+                Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      child: Text("Gallery"),
+                      onPressed: () async {
+                        image = await picker.pickImage(source: ImageSource.gallery);
+                        setState(() {
+                          pathOfImage = image!.path;
+                        });
+                      },
+                    )),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text("PATH: $pathOfImage"),
+            if (pathOfImage != "NOTHING SELECTED")
+              Image.file(File(pathOfImage), width: 100)
           ],
         ),
       ),
