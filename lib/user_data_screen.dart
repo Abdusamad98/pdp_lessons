@@ -9,6 +9,16 @@ class UserDataScreen extends StatefulWidget {
 }
 
 class _UserDataScreenState extends State<UserDataScreen> {
+  String name = "";
+
+
+  @override
+  void initState() {
+    name = prefs!.getString("name") ?? "Not Set";
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,15 +29,19 @@ class _UserDataScreenState extends State<UserDataScreen> {
         padding: EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+
           children: [
             Text(
-              "User Name: ${prefs!.getString("name")}",
+              "User Name: ${name}",
               style: TextStyle(fontSize: 22),
             ),
             const SizedBox(height: 12),
             TextField(
               onChanged: (value) async {
                 await prefs!.setString("name", value);
+                setState(() {
+                  name = prefs!.getString("name") ?? "Not Set";
+                });
               },
               decoration: InputDecoration(
                   hintText: "Update name", border: OutlineInputBorder()),
