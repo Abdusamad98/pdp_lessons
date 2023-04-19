@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pdp_lessons/models/question_model.dart';
 import 'package:pdp_lessons/models/subject_model.dart';
 import 'package:pdp_lessons/subject_test_screen.dart';
+import 'package:pdp_lessons/user_data_screen.dart';
 import 'package:pdp_lessons/widgets/subject_view.dart';
 
 class SubjectsScreen extends StatefulWidget {
@@ -18,15 +19,22 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.deepPurpleAccent,
-        leading: Container(
-          margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            Icons.person,
-            color: Colors.grey,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return UserDataScreen();
+            }));
+          },
+          child: Container(
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.person,
+              color: Colors.grey,
+            ),
           ),
         ),
         title: RichText(
@@ -94,6 +102,14 @@ List<SubjectModel> subjects = [
         text: "What ___ your name? 3",
         trueAnswer: "is",
         variant1: "are",
+        variant2: "be",
+        variant3: "is",
+        variant4: "was",
+      ),
+      QuestionModel(
+        text: "___ you a student ?",
+        trueAnswer: "Are",
+        variant1: "Are",
         variant2: "be",
         variant3: "is",
         variant4: "was",

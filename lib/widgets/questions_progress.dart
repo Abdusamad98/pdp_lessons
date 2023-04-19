@@ -46,6 +46,8 @@ class QuestionProgress extends StatelessWidget {
               child: SizedBox(),
             );
           }),
+          const SizedBox(width: 6),
+
           Text("$currentCount / $totalCount"),
         ],
       ),
