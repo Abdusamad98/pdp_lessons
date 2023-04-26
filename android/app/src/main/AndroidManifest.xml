@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.pdp_lessons">
    <application
-        android:label="pdp_lessons"
+        android:label="Dictionary"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
