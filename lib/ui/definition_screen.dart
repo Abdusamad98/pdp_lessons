@@ -49,10 +49,8 @@ class _DefinitionScreenState extends State<DefinitionScreen> {
                           audioUrl = response.data[0]["phonetics"][0]["audio"];
                           setState(() {
                             isLoading = false;
-                            definitionText = response.data[0]["meanings"][0]
-                                ["definitions"][0]["definition"];
-                            trancriptionOfTheWord =
-                                response.data[0]["phonetic"];
+                            definitionText = response.data[0]["meanings"][0]["definitions"][0]["definition"];
+                            trancriptionOfTheWord = response.data[0]["phonetic"];
                           });
                         }
                       },
